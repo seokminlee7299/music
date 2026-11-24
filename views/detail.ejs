@@ -1,0 +1,55 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <div class="meta">
+    <span><%= track.genre %></span>
+    <span>#<%= track.mood %></span>
+    <% if (track.release_year) { %>
+      <span><%= track.release_year %>년</span>
+    <% } %>
+  </div>
+  <h1><%= track.title %></h1>
+  <p class="artist"><%= track.artist %></p>
+  <p class="reason"><%= track.recommend_reason %></p>
+
+  <div class="actions">
+    <a href="/tracks/<%= track.id %>/edit" class="btn-link">곡 수정</a>
+    <form method="POST" action="/tracks/<%= track.id %>/delete" onsubmit="return confirm('이 곡과 감상 기록을 모두 삭제할까요?');">
+      <button type="submit" class="danger">곡 삭제</button>
+    </form>
+    <a href="/" class="btn-link">← 목록으로</a>
+  </div>
+</section>
+
+<section class="card">
+  <h2>청취 기록 남기기</h2>
+  <form method="POST" action="/tracks/<%= track.id %>/logs" class="stack-form">
+    <label>청취 날짜* <input type="date" name="listened_on" required></label>
+    <label>평점 (1~5)* <input type="number" name="rating" min="1" max="5" required></label>
+    <label>한줄 감상* <input type="text" name="memo" maxlength="255" required></label>
+    <button type="submit">기록 추가</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>청취 기록 (<%= logs.length %>)</h2>
+  <% if (logs.length === 0) { %>
+    <p class="empty-msg">아직 등록된 청취 기록이 없습니다.</p>
+  <% } %>
+  <ul class="log-list">
+    <% logs.forEach(log => { %>
+      <li class="log-item">
+        <div>
+          <strong><%= new Date(log.listened_on).toISOString().slice(0, 10) %></strong>
+          <span>· 평점 <%= log.rating %>/5</span>
+          <p><%= log.memo %></p>
+        </div>
+        <form method="POST" action="/tracks/<%= track.id %>/logs/<%= log.id %>/delete">
+          <button type="submit" class="danger">삭제</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>곡 정보 수정</h1>
+  <form method="POST" action="/tracks/<%= track.id %>/update" class="stack-form">
+    <label>곡 제목* <input type="text" name="title" value="<%= track.title %>" required></label>
+    <label>아티스트* <input type="text" name="artist" value="<%= track.artist %>" required></label>
+    <label>장르* <input type="text" name="genre" value="<%= track.genre %>" required></label>
+    <label>무드* <input type="text" name="mood" value="<%= track.mood %>" required></label>
+    <label>발매연도 <input type="number" name="release_year" min="1900" max="2100" value="<%= track.release_year || '' %>"></label>
+    <label>추천 이유* <textarea name="recommend_reason" rows="3" required><%= track.recommend_reason %></textarea></label>
+    <div class="actions">
+      <button type="submit">수정 저장</button>
+      <a href="/tracks/<%= track.id %>" class="btn-link">취소</a>
+    </div>
+  </form>
+</section>
+
+<%- include('partials/footer') %>

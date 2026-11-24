@@ -1,0 +1,23 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: sans-serif; background: #f5f6f8; color: #222; }
+.container { max-width: 860px; margin: 0 auto; padding: 20px; }
+.site-header { background: #1e242b; color: #fff; }
+.header-inner { display: flex; justify-content: space-between; align-items: center; }
+.brand { color: #fff; font-weight: bold; text-decoration: none; font-size: 1.1rem; }
+nav a { color: #dce3ea; margin-left: 16px; text-decoration: none; }
+.card { background: #fff; border-radius: 8px; padding: 20px; margin-bottom: 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+.track-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin-bottom: 20px; }
+.meta span { background: #eef1f5; padding: 3px 8px; border-radius: 4px; font-size: 0.85rem; margin-right: 6px; }
+.artist { color: #555; font-weight: 600; margin: 6px 0; }
+.card-footer { display: flex; justify-content: space-between; align-items: center; font-size: 0.85rem; color: #666; margin-top: 12px; }
+.stack-form { display: flex; flex-direction: column; gap: 12px; }
+.stack-form label { display: flex; flex-direction: column; gap: 4px; font-size: 0.9rem; }
+.filter-form { display: flex; gap: 8px; flex-wrap: wrap; }
+input, textarea, button, .btn-link { padding: 8px 12px; border-radius: 6px; border: 1px solid #ccc; font-size: 0.95rem; }
+button { background: #2563eb; color: #fff; border: none; cursor: pointer; }
+button.danger { background: #dc2626; }
+.btn-link { background: #eef1f5; color: #222; text-decoration: none; display: inline-block; }
+.actions { display: flex; gap: 10px; align-items: center; margin-top: 14px; }
+.log-list { list-style: none; padding: 0; margin: 0; }
+.log-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid #eee; }
+.site-footer { text-align: center; color: #777; font-size: 0.85rem; padding: 16px 0; }

@@ -1,0 +1,52 @@
+<%- include('partials/header') %>
+
+<section class="card">
+  <h1>최애곡 큐레이션</h1>
+  <form method="GET" action="/" class="filter-form">
+    <input type="text" name="genre" placeholder="장르 (예: R&B, 록)" value="<%= filters.genre %>">
+    <input type="text" name="mood" placeholder="무드 (예: 밤산책, 집중)" value="<%= filters.mood %>">
+    <button type="submit">필터 적용</button>
+    <a href="/" class="btn-link">초기화</a>
+  </form>
+</section>
+
+<section class="track-grid">
+  <% if (tracks.length === 0) { %>
+    <p class="empty-msg">조건에 맞는 곡이 없습니다. 아래에서 새 곡을 추가해 보세요.</p>
+  <% } %>
+
+  <% tracks.forEach(track => { %>
+    <article class="card track-card">
+      <div class="meta">
+        <span><%= track.genre %></span>
+        <span>#<%= track.mood %></span>
+        <% if (track.release_year) { %>
+          <span><%= track.release_year %>년</span>
+        <% } %>
+      </div>
+      <h2><a href="/tracks/<%= track.id %>"><%= track.title %></a></h2>
+      <p class="artist"><%= track.artist %></p>
+      <p class="reason"><%= track.recommend_reason %></p>
+      <div class="card-footer">
+        <span>감상 기록 <%= track.log_count %>건</span>
+        <span>평균 평점: <%= track.avg_rating || '-' %> / 5</span>
+        <a href="/tracks/<%= track.id %>">상세 보기 →</a>
+      </div>
+    </article>
+  <% }) %>
+</section>
+
+<section id="add-track" class="card">
+  <h2>새 최애곡 등록</h2>
+  <form method="POST" action="/tracks" class="stack-form">
+    <label>곡 제목* <input type="text" name="title" required></label>
+    <label>아티스트* <input type="text" name="artist" required></label>
+    <label>장르* <input type="text" name="genre" required></label>
+    <label>무드* <input type="text" name="mood" required></label>
+    <label>발매연도 <input type="number" name="release_year" min="1900" max="2100"></label>
+    <label>추천 이유* <textarea name="recommend_reason" rows="3" required></textarea></label>
+    <button type="submit">곡 저장하기</button>
+  </form>
+</section>
+
+<%- include('partials/footer') %>
